@@ -10,6 +10,7 @@ import lombok.*;
 public class Customer {
     @Id @GeneratedValue
     private Long id;
-    private String name;
+    private String firstname;
+    private String lastname;
     private String email;
 }
