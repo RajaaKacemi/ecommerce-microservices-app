@@ -28,7 +28,7 @@ public class GetwayServiceApplication {
 
     @Bean
     public DiscoveryClientRouteDefinitionLocator dynamicRoutes(ReactiveDiscoveryClient rdc,
-                                                               DiscoveryLocatorProperties dlp){
+                                                               DiscoveryLocatorProperties  dlp){
         return new DiscoveryClientRouteDefinitionLocator(rdc , dlp);
     }
 
