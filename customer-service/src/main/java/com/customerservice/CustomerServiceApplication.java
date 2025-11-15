@@ -1,6 +1,6 @@
 package com.customerservice;
 
-import com.customerservice.entities.Customer;
+import com.customerservice.entitie.Customer;
 import com.customerservice.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

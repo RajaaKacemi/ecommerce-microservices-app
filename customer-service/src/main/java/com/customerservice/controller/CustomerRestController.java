@@ -1,6 +1,6 @@
 package com.customerservice.controller;
 
-import com.customerservice.entities.Customer;
+import com.customerservice.entitie.Customer;
 import com.customerservice.repository.CustomerRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,7 @@ public class CustomerRestController {
     }
 
     @PostMapping("/customers")
-    public Customer saverCustomer(@RequestBody Customer customer){
+    public Customer saveCustomer(@RequestBody Customer customer){
         return customerRepository.save(customer);
     }
 }
