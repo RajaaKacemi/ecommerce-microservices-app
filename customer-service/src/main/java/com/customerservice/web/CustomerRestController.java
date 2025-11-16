@@ -1,4 +1,4 @@
-package com.customerservice.controller;
+package com.customerservice.web;
 
 import com.customerservice.entitie.Customer;
 import com.customerservice.repository.CustomerRepository;
