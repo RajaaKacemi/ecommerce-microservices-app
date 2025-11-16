@@ -45,4 +45,22 @@ public class CustomerRestController {
             return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage())); }
     }
 
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<?> updateCustomer(@RequestBody CustomerRequestDTO request, @PathVariable Long id){
+        try {
+            CustomerResponseDTO customerResponseDTO = customerService.update(request);
+            return ResponseEntity.ok(customerResponseDTO);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage()));
+        }
+    }
+    @DeleteMapping("/customers/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
+        try {
+            customerService.deleteCustomer(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage()));
+        }
+    }
 }
