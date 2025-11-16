@@ -8,10 +8,18 @@ import com.customerservice.exception.EmailAlreadyUsedException;
 import com.customerservice.mapper.CustomerMapper;
 import com.customerservice.repository.CustomerRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
+@Transactional
+@Slf4j
+@AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService{
     private CustomerRepository customerRepository;
     private CustomerMapper customerMapper;
@@ -26,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public List<CustomerResponseDTO> listCustomer() {
+    public List<CustomerResponseDTO> listCustomers() {
         return customerRepository.findAll().stream().map(customerMapper::from).collect(Collectors.toList());
     }
 

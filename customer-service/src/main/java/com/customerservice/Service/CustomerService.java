@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CustomerService {
     CustomerResponseDTO save(CustomerRequestDTO request) throws EmailAlreadyUsedException;
-    List<CustomerResponseDTO> listCustomer();
+    List<CustomerResponseDTO> listCustomers();
     CustomerResponseDTO getCustomerById(Long id) throws CustomerNotFoundException;
     CustomerResponseDTO update(CustomerRequestDTO request) throws CustomerNotFoundException, EmailAlreadyUsedException;
     void deleteCustomer(Long id) throws CustomerNotFoundException;

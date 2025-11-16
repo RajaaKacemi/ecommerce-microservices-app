@@ -1,27 +1,48 @@
 package com.customerservice.web;
 
-import com.customerservice.entitie.Customer;
-import com.customerservice.repository.CustomerRepository;
+import com.customerservice.Service.CustomerService;
+import com.customerservice.dto.CustomerRequestDTO;
+import com.customerservice.dto.CustomerResponseDTO;
+import com.customerservice.exception.CustomerNotFoundException;
+import com.customerservice.exception.EmailAlreadyUsedException;
+import com.customerservice.exception.ErrorMessage;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/customers")
+@Slf4j
+@AllArgsConstructor
 public class CustomerRestController {
-    private CustomerRepository customerRepository;
-
-    public CustomerRestController(CustomerRepository customerRepository){
-        this.customerRepository = customerRepository;
-    }
+    private CustomerService customerService;
 
     @GetMapping("/customers")
-    public List<Customer> listCustomers(){
-        return customerRepository.findAll();
+    public List<CustomerResponseDTO> listCustomers(){
+        return customerService.listCustomers();
+    }
+    @GetMapping("/customers/search")
+    public List<CustomerResponseDTO> searchCustomers(@RequestParam(name = "keyword", defaultValue = "") String keyword){
+        return customerService.findCustomers("%"+keyword+"%");
+    }
+    @GetMapping("/customers/{id}")
+    public ResponseEntity<?> getCustomerById(@PathVariable Long id){
+        try {
+            CustomerResponseDTO customerById = customerService.getCustomerById(id);
+            return ResponseEntity.ok(customerById);
+        } catch (CustomerNotFoundException e) {
+            return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage()));
+        }
+    }
+    @PostMapping("/customers")
+    public ResponseEntity<?> saveNewCustomer(@RequestBody CustomerRequestDTO request){
+        try {
+            CustomerResponseDTO customerResponseDTO = customerService.save(request);
+            return ResponseEntity.ok(customerResponseDTO);
+        } catch (EmailAlreadyUsedException e) {
+            return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage())); }
     }
 
-    @PostMapping("/customers")
-    public Customer saveCustomer(@RequestBody Customer customer){
-        return customerRepository.save(customer);
-    }
 }
