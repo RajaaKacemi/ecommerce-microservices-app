@@ -1,4 +1,4 @@
-package com.inventoryservice.controller;
+package com.inventoryservice.web;
 
 import com.inventoryservice.Service.ProductService;
 import com.inventoryservice.dto.ProductRequestDTO;
