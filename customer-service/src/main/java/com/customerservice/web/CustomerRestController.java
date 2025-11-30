@@ -16,18 +16,19 @@ import java.util.List;
 @RestController
 @Slf4j
 @AllArgsConstructor
+@RequestMapping("api/customers")
 public class CustomerRestController {
     private CustomerService customerService;
 
-    @GetMapping("/customers")
+    @GetMapping()
     public List<CustomerResponseDTO> listCustomers(){
         return customerService.listCustomers();
     }
-    @GetMapping("/customers/search")
+    @GetMapping("search")
     public List<CustomerResponseDTO> searchCustomers(@RequestParam(name = "keyword", defaultValue = "") String keyword){
         return customerService.findCustomers("%"+keyword+"%");
     }
-    @GetMapping("/customers/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long id){
         try {
             CustomerResponseDTO customerById = customerService.getCustomerById(id);
@@ -36,7 +37,7 @@ public class CustomerRestController {
             return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage()));
         }
     }
-    @PostMapping("/customers")
+    @PostMapping()
     public ResponseEntity<?> saveNewCustomer(@RequestBody CustomerRequestDTO request){
         try {
             CustomerResponseDTO customerResponseDTO = customerService.save(request);
@@ -45,7 +46,7 @@ public class CustomerRestController {
             return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage())); }
     }
 
-    @PutMapping("/customers/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<?> updateCustomer(@RequestBody CustomerRequestDTO request, @PathVariable Long id){
         try {
             CustomerResponseDTO customerResponseDTO = customerService.update(request);
@@ -54,7 +55,7 @@ public class CustomerRestController {
             return ResponseEntity.internalServerError().body(new ErrorMessage(e.getMessage()));
         }
     }
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
         try {
             customerService.deleteCustomer(id);

@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductRestController {
     private ProductService productService;
 
-    @GetMapping
+    @PostMapping
     public ProductResponseDTO save(@RequestParam ProductRequestDTO product){
         return productService.save(product);
     }
@@ -23,21 +23,22 @@ public class ProductRestController {
         return productService.listProducts();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ProductResponseDTO get(@PathVariable Long id) throws ProductNotFoundException {
         return productService.getProductById(id);
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("{id}")
     public ProductResponseDTO update(@PathVariable Long id, @RequestParam ProductRequestDTO productUpdated) throws ProductNotFoundException {
         return productService.update(id, productUpdated);
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) throws ProductNotFoundException {
         productService.delete(id);
     }
 
+    @GetMapping("search")
     public List<ProductResponseDTO> search(@RequestParam String keyword){
         return productService.findProduct(keyword);
     }
