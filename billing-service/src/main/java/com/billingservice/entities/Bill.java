@@ -16,7 +16,9 @@ public class Bill {
     private Date billingDate;
     private long customerId;
     @OneToMany(mappedBy = "bill")
+    //Une facture contient plusieurs ProductItems
     private List<ProductItem> productsItems;
     @Transient
+    //Indiquer a JPA que cette attribuer n'existe pas.
     private Customer customer;
 }
