@@ -1,11 +1,12 @@
-package com.inventoryservice.Service;
+package com.inventoryservice.service;
 
 import com.inventoryservice.dto.ProductRequestDTO;
 import com.inventoryservice.dto.ProductResponseDTO;
 import com.inventoryservice.exception.ProductNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface ProductService {
     ProductResponseDTO save(ProductRequestDTO productRequestDTO);
     ProductResponseDTO update(Long id, ProductRequestDTO productRequestDTO) throws ProductNotFoundException;

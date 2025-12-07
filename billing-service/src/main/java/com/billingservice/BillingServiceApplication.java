@@ -25,7 +25,7 @@ public class BillingServiceApplication {
     @Bean
     CommandLineRunner commandLineRunner(BillRepository billRepository, ProductItemRepository productItemRepository) {
      return args -> {
-        List<Long> customersIds = List.of(1L, 2L);
+        List<Long> customersIds = List.of(6L, 7L);
         List<Long> productIds = List.of(1L, 2L);
         customersIds.forEach(clientId ->{
             Bill bill = new Bill();

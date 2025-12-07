@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 // OpenFeign est un framework declarative -> on a pas besion de programmer.
 //On declare l'interface et les methodes.
 public interface CustomerServiceRestClient {
-    @GetMapping("/customers/{id}")
+    @GetMapping("api/customers/{id}")
     @CircuitBreaker(name="customer-service", fallbackMethod = "getDefaultCustomer")
     Customer findCustomerById(@PathVariable Long id);
 

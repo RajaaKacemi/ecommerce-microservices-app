@@ -18,8 +18,6 @@ public class BillRestController {
     @Autowired
     private BillRepository  billRepository;
     @Autowired
-    private ProductItemRepository productItemRepository;
-    @Autowired
     private CustomerServiceRestClient customerServiceRestClient;
     @Autowired
     private InventoryServiceRestClient inventoryServiceRestClient;

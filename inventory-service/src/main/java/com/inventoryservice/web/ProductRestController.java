@@ -1,6 +1,6 @@
 package com.inventoryservice.web;
 
-import com.inventoryservice.Service.ProductService;
+import com.inventoryservice.service.ProductService;
 import com.inventoryservice.dto.ProductRequestDTO;
 import com.inventoryservice.dto.ProductResponseDTO;
 import com.inventoryservice.exception.ProductNotFoundException;
@@ -11,10 +11,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products/")
 public class ProductRestController {
-    private ProductService productService;
+
+    private final ProductService productService;
+
+    public ProductRestController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping
-    public ProductResponseDTO save(@RequestParam ProductRequestDTO product){
+    public ProductResponseDTO save(@RequestBody ProductRequestDTO product){
         return productService.save(product);
     }
 
@@ -29,7 +34,8 @@ public class ProductRestController {
     }
 
     @PutMapping("{id}")
-    public ProductResponseDTO update(@PathVariable Long id, @RequestParam ProductRequestDTO productUpdated) throws ProductNotFoundException {
+    public ProductResponseDTO update(@PathVariable Long id, @RequestBody ProductRequestDTO productUpdated)
+            throws ProductNotFoundException {
         return productService.update(id, productUpdated);
     }
 

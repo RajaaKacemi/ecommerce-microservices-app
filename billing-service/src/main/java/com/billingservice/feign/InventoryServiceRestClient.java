@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "inventory-service")
 public interface InventoryServiceRestClient {
-    @GetMapping("/products/{id}")
+    @GetMapping("api/products/{id}")
     @CircuitBreaker(name = "inv-service", fallbackMethod = "getDefaultProduct")
     Product getProductById(@PathVariable("id") Long productId);
 
